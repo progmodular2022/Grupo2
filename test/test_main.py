@@ -1,8 +1,8 @@
-import main
 import sys
 path_to_module = "./src/"
 sys.path.append(path_to_module)
 
+import main
 
 def test_check_letter():
     assert main.check_letter("a", "banana") == True
@@ -27,3 +27,8 @@ def test_check_full_word():
     assert main.check_full_word("abacaxi", "abacate") == False
     assert main.check_full_word("abacaxi", "abacaxi") == True
     assert main.check_full_word("coelho", "ventilador") == False
+
+
+test_check_letter()
+test_add_letter()
+test_check_full_word()
