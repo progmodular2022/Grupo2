@@ -30,5 +30,5 @@ def test_check_full_word():
 
 
 test_check_letter()
-test_add_letter()
+# test_add_letter()
 test_check_full_word()
