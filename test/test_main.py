@@ -32,16 +32,7 @@ def test_check_full_word():
     assert main.check_full_word("coelho", "ventilador") == False
 
 
-def test_file_words_to_vector():
-    vector = []
-    words = ["banana", "abacaxi", "abacate", "coelho", "ventilador"]
-    for word in words:
-        vector.append(word.strip())
-    assert main.file_words_to_vector(words) == vector
-
-
 # test_select_word()
 # test_check_letter()
 # test_add_letter()
 # test_check_full_word()
-test_file_words_to_vector()
