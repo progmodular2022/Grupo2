@@ -4,11 +4,6 @@ sys.path.append(path_to_module)
 
 import main
 
-def test_select_word():
-    words = ["banana", "abacaxi", "abacate", "coelho", "ventilador"]
-    assert main.select_word(words) != words
-
-
 def test_check_letter():
     assert main.check_letter("a", "banana") == True
     assert main.check_letter("b", "banana") == True
