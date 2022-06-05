@@ -13,6 +13,7 @@ arroz
 sorvete
 pirulito
 salsicha
+cilindro
 cabeceira
 cadeado
 garrafa
