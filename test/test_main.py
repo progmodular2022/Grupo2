@@ -33,8 +33,11 @@ def test_check_full_word():
 
 
 def test_file_words_to_vector():
+    vector = []
     words = ["banana", "abacaxi", "abacate", "coelho", "ventilador"]
-    assert main.file_words_to_vector(words) != words
+    for word in words:
+        vector.append(word.strip())
+    assert main.file_words_to_vector(words) == vector
 
 
 # test_select_word()
