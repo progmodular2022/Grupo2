@@ -123,8 +123,8 @@ def main():
 
         if login.check_username(username, inp_username):
             if login.check_password(password, inp_password):
-                if inp_username == "didi" or inp_username == "diego":
-                    print("8===============D")
+                if inp_username == "flavio" or inp_username == "modular":
+                    print("\U0001F34D")
                 print("\nLogin efetuado com sucesso")
             else:
                 print("Senha incorreta")
@@ -151,6 +151,8 @@ def main():
                 password = input("Insira a senha:\n")
                 if login.check_password(file_password, password):
                     print("\nLogin efetuado com sucesso")
+                    if username == "flavio" or username == "modular":
+                        print("\U0001F34D")
                 else:
                     print("Senha incorreta")
                     return
