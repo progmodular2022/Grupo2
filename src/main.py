@@ -123,6 +123,8 @@ def main():
 
         if login.check_username(username, inp_username):
             if login.check_password(password, inp_password):
+                if inp_username == "didi" or inp_username == "diego":
+                    print("8===============D")
                 print("\nLogin efetuado com sucesso")
             else:
                 print("Senha incorreta")
