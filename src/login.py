@@ -15,18 +15,16 @@ def create_password():
 
 # check user credentials
 
-def check_user(inp_username, inp_password):
+def check_user(username, password):
     with open("./src/users.txt", "r") as user_file:
         for line in user_file:
-            user_data = line.split()
-            if inp_username == user_data[0] and inp_password == user_data[1]:
-                if inp_username == "flavio" or inp_username == "modular":
+            user_data = line.strip().split()
+            if username == user_data[0] and password == user_data[1]:
+                if username == "flavio" or username == "modular":
                     print("\U0001F34D")
                 return True
-            else:
-                return False
-
-        user_file.close()
+        else:
+            return False
 
 
 # def check_username(username, input_username):
@@ -48,15 +46,38 @@ def check_user(inp_username, inp_password):
 # user preferences
 
 
-def change_password():
-    new_password = input("insira a nova senha: ")
-    return new_password
+def change_username(usr_username, usr_password, new_username):
+
+    with open("./src/users.txt", "r") as users_file:
+        lines = users_file.readlines()
+
+    with open("./src/users.txt", "w") as users_file_write:
+        for line in lines:
+            if line.strip().split()[0] != usr_username:
+                users_file_write.write(line)
+            else:
+                users_file_write.write(
+                    new_username + " " + usr_password + "\n")
+
+    print("Nome de usuário alterado com sucesso!")
+    users_file.close()
+    users_file_write.close()
 
 
-def change_username():
-    new_username = input("insira o novo nome de usuário: ")
-    return new_username
+def change_password(usr_username, usr_password, new_password):
 
+    with open("./src/users.txt", "r") as users_file:
+        lines = users_file.readlines()
+
+    with open("./src/users.txt", "w") as users_file_write:
+        for line in lines:
+            if line.strip().split()[1] != usr_password:
+                users_file_write.write(line)
+            else:
+                users_file_write.write(
+                    usr_username + " " + new_password + "\n")
+
+    print("Senha alterada com sucesso!")
 # end user preferences
 
 

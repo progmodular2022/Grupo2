@@ -106,8 +106,8 @@ def display_hangman():
 
 
 def main():
-    # utilizando componente reutilizavel para login
 
+    # utilizando componente reutilizavel para login
     usr_inp = input("Já possui conta? (s/n)\n")
 
     if usr_inp == "n":
@@ -123,78 +123,40 @@ def main():
 
         if login.check_user(inp_username, inp_password):
             print("Login realizado com sucesso!")
-
         else:
             print("Login inválido!")
+            return
 
     else:
-        username = input("Insira o nome de usuário:\n")
+        usr_username = input("Insira o nome de usuário:\n")
+        usr_password = input("Insira a senha:\n")
 
-        with open("./src/users.txt", "r") as users_file:
-            for line in users_file:
-                if username == line.strip().split()[0]:
-                    user_data = line.split()
-                    file_username = user_data[0]
-                    file_password = user_data[1]
-                    break
-            else:
-                print("Usuário não existe")
-                return
+        if login.check_user(usr_username, usr_password):
+            print("Login efetuado com sucesso")
+        else:
+            print("Login inválido")
+            return
 
-            if login.check_username(file_username, username):
-                password = input("Insira a senha:\n")
-                if login.check_password(file_password, password):
-                    print("\nLogin efetuado com sucesso")
+        usr_change = input(
+            "\nDeseja alterar o nome de usuário ou senha? (s/n)\n")
 
-                    # usr_change = input(
-                    #     "\nDeseja alterar o nome de usuário ou senha? (s/n)\n")
+        if usr_change == "s":
 
-                    # if usr_change == "s":
+            alter_username = input(
+                "Deseja alterar o nome de usuário? (s/n)\n")
 
-                    #     alter_username = input(
-                    #         "Deseja alterar o nome de usuário? (s/n)\n")
+            if alter_username == "s":
+                new_username = input("Insira o novo nome de usuário:\n")
+                login.change_username(usr_username, usr_password, new_username)
 
-                    #     if alter_username == "s":
-                    #         new_username = login.change_username()
+            alter_password = input(
+                "Deseja alterar a senha? (s/n)\n")
 
-                    #         with open("./src/users.txt", "r") as users_file:
-                    #             for line in users_file:
-                    #                 if username == line.strip().split()[0]:
-                    #                     line.strip().split()[0] = new_username
-                    #                     old_username = line.strip().split()[0]
-                    # else:
-                    #     print("nome de usuário não encontrado")
-                    #     users_file.close()
-                    #     return
+            if alter_password == "s":
+                new_password = input("Insira a nova senha:\n")
+                login.change_password(usr_username, usr_password, new_password)
 
-                    # with open("./src/users.txt", "r") as users_file:
-                    #     with open("./src/users.txt", "w") as users_file_write:
-                    #         for line in users_file:
-                    #             if old_username == line.strip().split()[0]:
-                    #                 line = line.strip().split()
-                    #                 line[0] = new_username
-                    #                 line = " ".join(line)
-                    #                 users_file_write.write(
-                    #                     line + "\n")
-
-                    #                 if line.strip().split()[0] == new_username:
-                    #                     print(
-                    #                         "Nome de usuário alterado com sucesso")
-                    #                 else:
-                    #                     print(
-                    #                         "Nome de usuário não alterado")
-                    #             else:
-                    #                 users_file_write.write(line)
-
-                    if username == "flavio" or username == "modular":
-                        print("\U0001F34D")
-
-                else:
-                    print("Senha incorreta")
-                    return
-
-    #
-
+    # daqui pra baixo é o jogo
     words = open("./src/words.txt", "r").read()
     words_vector = file_words_to_vector(words.split("\n"))
 
@@ -270,6 +232,7 @@ def main():
             else:
                 print("\nVocê perdeu!")
                 return
+    # fim do jogo
 
 
 if __name__ == "__main__":
