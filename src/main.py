@@ -121,17 +121,11 @@ def main():
         inp_username = input("Insira o nome de usuário:\n")
         inp_password = input("Insira a senha:\n")
 
-        if login.check_username(username, inp_username):
-            if login.check_password(password, inp_password):
-                if inp_username == "flavio" or inp_username == "modular":
-                    print("\U0001F34D")
-                print("\nLogin efetuado com sucesso")
-            else:
-                print("Senha incorreta")
-                return
+        if login.check_user(inp_username, inp_password):
+            print("Login realizado com sucesso!")
+
         else:
-            print("Usuário não existe")
-            return
+            print("Login inválido!")
 
     else:
         username = input("Insira o nome de usuário:\n")
@@ -151,8 +145,50 @@ def main():
                 password = input("Insira a senha:\n")
                 if login.check_password(file_password, password):
                     print("\nLogin efetuado com sucesso")
+
+                    # usr_change = input(
+                    #     "\nDeseja alterar o nome de usuário ou senha? (s/n)\n")
+
+                    # if usr_change == "s":
+
+                    #     alter_username = input(
+                    #         "Deseja alterar o nome de usuário? (s/n)\n")
+
+                    #     if alter_username == "s":
+                    #         new_username = login.change_username()
+
+                    #         with open("./src/users.txt", "r") as users_file:
+                    #             for line in users_file:
+                    #                 if username == line.strip().split()[0]:
+                    #                     line.strip().split()[0] = new_username
+                    #                     old_username = line.strip().split()[0]
+                    # else:
+                    #     print("nome de usuário não encontrado")
+                    #     users_file.close()
+                    #     return
+
+                    # with open("./src/users.txt", "r") as users_file:
+                    #     with open("./src/users.txt", "w") as users_file_write:
+                    #         for line in users_file:
+                    #             if old_username == line.strip().split()[0]:
+                    #                 line = line.strip().split()
+                    #                 line[0] = new_username
+                    #                 line = " ".join(line)
+                    #                 users_file_write.write(
+                    #                     line + "\n")
+
+                    #                 if line.strip().split()[0] == new_username:
+                    #                     print(
+                    #                         "Nome de usuário alterado com sucesso")
+                    #                 else:
+                    #                     print(
+                    #                         "Nome de usuário não alterado")
+                    #             else:
+                    #                 users_file_write.write(line)
+
                     if username == "flavio" or username == "modular":
                         print("\U0001F34D")
+
                 else:
                     print("Senha incorreta")
                     return
@@ -190,19 +226,36 @@ def main():
 
         # pegando input do player
         user_letter = input("\n>Digite uma letra: ")
-        used_letters.append(user_letter)
+        print("Se quiser chutar a palavra completa digite 'chutar' para então digitar a palavra")
 
-        # verificando se a letra digitada existe na palavra
-        if check_letter(user_letter, word):
-            user_word, letters_found = add_letter(
-                user_letter, word, user_word, letters_found)
+        if user_letter == "chutar":
+            user_word = input("Digite a palavra completa: ")
+            if check_full_word:
+                print("\nParabéns, você ganhou!")
+                return
+            else:
+                print("\nVocê perdeu!")
+                return
+
+        # verificando se a letra já foi usada
+        if user_letter in used_letters:
+            print("\nLetra já usada")
+            continue
+
         else:
-            print("\n>Letra não encontrada")
-            attempts_count += 1
-            if attempts_count == attempts:
-                print(">Número máximo de tentativas atingido\n>Você perdeu!")
-                print("Você errou, a palavra era:", word)
-                break
+            used_letters.append(user_letter)
+
+            # verificando se a letra digitada existe na palavra
+            if check_letter(user_letter, word):
+                user_word, letters_found = add_letter(
+                    user_letter, word, user_word, letters_found)
+            else:
+                print("\n>Letra não encontrada")
+                attempts_count += 1
+                if attempts_count == attempts:
+                    print(">Número máximo de tentativas atingido\n>Você perdeu!")
+                    print("Você errou, a palavra era:", word)
+                    return
 
         # verificando se numero de letras encontradas tem o tamanho da palavra pra ver se o player ganhou sem digitar a palavra completa
         if letters_found == len(word):
@@ -213,36 +266,10 @@ def main():
             # verificando se palavra formada pelas letras está certa
             if check_full_word:
                 print("\nParabéns, você ganhou!")
-                break
+                return
             else:
                 print("\nVocê perdeu!")
-                break
-
-        # a partir daqui o player pode vencer chutando a palavra toda
-        # verificando quantidade de letras encontradas para chutar palavra ou digitar mais letras
-        if len(word) - letters_found <= len(word) // 2:
-            print("\nletras já usadas:", end="")
-            for letters in used_letters:
-                print(letters, end=" ")
-
-            print("\nPalavra: ", end="")
-            for letter in user_word:
-                print(letter, end=" ")
-
-            usr_choice = input(
-                "\n\n>falta metade das letras, quer chutar a palavra ou tentar outra letra? (chutar/letra)\n")
-
-            # se o player escolher chutar, verificar se a palavra ta certa pra finalizar o jogo depois
-            if usr_choice == "chutar":
-                user_word = input("Digita a palavra: ")
-                if check_full_word(user_word, word):
-                    print("\nVocê venceu!")
-                    break
-
-                else:
-                    print("\nVocê perdeu!")
-                    print("Você errou, a palavra era:", word)
-                    break
+                return
 
 
 if __name__ == "__main__":
