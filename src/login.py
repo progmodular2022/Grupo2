@@ -1,16 +1,20 @@
-# new user:
+# create user:
 
 
-def create_username():
+def create_user():
     username = input("insira o nome de usuário: ")
-    return username
-
-
-def create_password():
     password = input("insira a senha: ")
-    return password
 
-# end new user
+    save_user(username, password)
+
+    if check_user(username, password):
+        print("Usuário criado com sucesso!")
+    else:
+        print("Erro ao criar usuário!")
+        return
+
+
+# end create user
 
 
 # check user credentials
@@ -26,19 +30,6 @@ def check_user(username, password):
         else:
             return False
 
-
-# def check_username(username, input_username):
-#     if username == input_username:
-#         return True
-#     else:
-#         return False
-
-
-# def check_password(password, input_password):
-#     if password == input_password:
-#         return True
-#     else:
-#         return False
 
 # end check user credentials
 

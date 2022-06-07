@@ -111,10 +111,7 @@ def main():
     usr_inp = input("Já possui conta? (s/n)\n")
 
     if usr_inp == "n":
-        username = login.create_username()
-        password = login.create_password()
-
-        login.save_user(username, password)
+        login.create_user()
 
         print("Conta criada, agora utilize os dados para logar.\n")
 
