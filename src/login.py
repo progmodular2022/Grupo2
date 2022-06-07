@@ -51,7 +51,7 @@ def chenge_username():
 
 
 def save_user(username, password):
-    with open("users.txt", "a") as file:
+    with open("./src/users.txt", "a") as file:
         file.write(username + " " + password + "\n")
 
 # end save user

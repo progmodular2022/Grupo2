@@ -123,6 +123,8 @@ def main():
 
         if login.check_username(username, inp_username):
             if login.check_password(password, inp_password):
+                if inp_username == "flavio" or inp_username == "modular":
+                    print("\U0001F34D")
                 print("\nLogin efetuado com sucesso")
             else:
                 print("Senha incorreta")
@@ -149,6 +151,8 @@ def main():
                 password = input("Insira a senha:\n")
                 if login.check_password(file_password, password):
                     print("\nLogin efetuado com sucesso")
+                    if username == "flavio" or username == "modular":
+                        print("\U0001F34D")
                 else:
                     print("Senha incorreta")
                     return
@@ -173,34 +177,40 @@ def main():
     while attempts_count <= attempts:
         print(stages[attempts_count])
 
+        # printando letras usadas
         if len(used_letters) > 0:
             print("letras já usadas:", end="")
             for letters in used_letters:
                 print(letters, end=" ")
 
+        # printando a palavra do player
         print("\nPalavra: ", end="")
         for letter in user_word:
             print(letter, end=" ")
 
+        # pegando input do player
         user_letter = input("\n>Digite uma letra: ")
         used_letters.append(user_letter)
 
+        # verificando se a letra digitada existe na palavra
         if check_letter(user_letter, word):
             user_word, letters_found = add_letter(
                 user_letter, word, user_word, letters_found)
         else:
-            print(">Letra não encontrada")
+            print("\n>Letra não encontrada")
             attempts_count += 1
             if attempts_count == attempts:
                 print(">Número máximo de tentativas atingido\n>Você perdeu!")
                 print("Você errou, a palavra era:", word)
                 break
 
+        # verificando se numero de letras encontradas tem o tamanho da palavra pra ver se o player ganhou sem digitar a palavra completa
         if letters_found == len(word):
             print("\nPalavra: ", end="")
             for letter in user_word:
                 print(letter, end=" ")
 
+            # verificando se palavra formada pelas letras está certa
             if check_full_word:
                 print("\nParabéns, você ganhou!")
                 break
@@ -208,13 +218,21 @@ def main():
                 print("\nVocê perdeu!")
                 break
 
+        # a partir daqui o player pode vencer chutando a palavra toda
+        # verificando quantidade de letras encontradas para chutar palavra ou digitar mais letras
         if len(word) - letters_found <= len(word) // 2:
+            print("\nletras já usadas:", end="")
+            for letters in used_letters:
+                print(letters, end=" ")
+
             print("\nPalavra: ", end="")
             for letter in user_word:
                 print(letter, end=" ")
-            usr_choice = input(
-                "\n>falta metade das letras, quer chutar a palavra ou tentar outra letra? (chutar/letra)\n")
 
+            usr_choice = input(
+                "\n\n>falta metade das letras, quer chutar a palavra ou tentar outra letra? (chutar/letra)\n")
+
+            # se o player escolher chutar, verificar se a palavra ta certa pra finalizar o jogo depois
             if usr_choice == "chutar":
                 user_word = input("Digita a palavra: ")
                 if check_full_word(user_word, word):
