@@ -8,9 +8,10 @@ def create_user():
     save_user(username, password)
 
     if check_user(username, password):
-        print("Usuário criado com sucesso!")
+        print("Usuário criado com sucesso")
+        return username, password
     else:
-        print("Erro ao criar usuário!")
+        print("Erro ao criar usuário")
         return
 
 
