@@ -7,7 +7,8 @@ def insereScore(nomeJogo, nomeUsuario, pontuacao):
     #No arquivo serao registrados a posicao, nomeUsuario e pontuacao
     #Tais dados ficarao separados por " "
     #O limite de dados salvos no arquivo e de 1024
-    #A funcao retorna -1 caso a nova pontuacao nao seja inserida 
+    #A funcao retorna -1 caso a nova pontuacao nao seja inserida
+    #A funcao retorna 1 na insercao com sucesso da pontuacao
     listaLinhas = []
     novaPosicao = 1
     contador = 1
@@ -38,7 +39,7 @@ def insereScore(nomeJogo, nomeUsuario, pontuacao):
     with open(nomeArquivo, "w") as arquivoSaida:
         for i in range(contador):
             arquivoSaida.write(str(i + 1) + " " + listaLinhas[i][1] + " " + listaLinhas[i][2] + "\n")
-    return
+    return 1
 
 
 
@@ -63,6 +64,7 @@ def removeScore(nomeJogo, nomeUsuario):
     #Atualiza os dados do Highscore apos a remocao
     #Todos os parametros devem ser strings
     #Retorna -1 caso o nomeUsuario nao seja encontrado no arquivo
+    #Retorna 1 ao remover a pontuacao com sucesso
     contador = 0
     listaLinhas = []
     usuarioEncontrado = 0
@@ -85,7 +87,7 @@ def removeScore(nomeJogo, nomeUsuario):
         with open("Score_" + nomeJogo + ".txt", "w") as arquivoSaida:
             for i in range(contador - 1):
                 arquivoSaida.write(str(i + 1) + " " + listaLinhas[i][1] + " " + listaLinhas[i][2] + "\n")
-    return
+    return 1
     
     
     
