@@ -9,7 +9,7 @@ def create_user():
 
     if check_user(username, password):
         print("Usuário criado com sucesso")
-        return username, password
+        return username
     else:
         print("Erro ao criar usuário")
         return
