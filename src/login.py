@@ -27,8 +27,10 @@ def check_user(username, password):
             if username == user_data[0] and password == user_data[1]:
                 if username == "flavio" or username == "modular":
                     print("\U0001F34D")
+                user_file.close()
                 return True
         else:
+            user_file.close()
             return False
 
 
@@ -38,8 +40,9 @@ def check_username_duplicity(username):
             user_data = line.strip().split()
             if username == user_data[0]:
                 return True
-            else:
-                return False
+        else:
+            print("Usuário não encontrado")
+            return False
 
 
 # end check user credentials
