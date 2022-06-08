@@ -594,10 +594,3 @@ if __name__ == "__main__":
     cenario.adicionar_movivel(pacman)
 
     gameLoop()
-
-
-
-
-
-
-    
