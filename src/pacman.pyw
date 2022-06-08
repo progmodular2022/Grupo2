@@ -8,7 +8,7 @@ import login
 pygame.init()
 
 screen = pygame.display.set_mode((800, 600), 0)
-pygame.display.set_captionj("Pacman")
+pygame.display.set_caption("Pacman")
 font = pygame.font.SysFont("arial", 20, True, False)
 
 AMARELO = (255, 255, 0)
