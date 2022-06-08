@@ -34,4 +34,3 @@ def test_check_username_duplicity():
     assert login.check_username_duplicity("test1") == False
     assert login.check_username_duplicity("test4") == False
     assert login.check_username_duplicity("dev") == True
-    assert login.check_username_duplicity("testenew") == True
