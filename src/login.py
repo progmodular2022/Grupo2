@@ -32,6 +32,16 @@ def check_user(username, password):
             return False
 
 
+def check_username_duplicity(username):
+    with open("./src/users.txt", "r") as user_file:
+        for line in user_file:
+            user_data = line.strip().split()
+            if username == user_data[0]:
+                return True
+            else:
+                return False
+
+
 # end check user credentials
 
 
@@ -39,7 +49,6 @@ def check_user(username, password):
 
 
 def change_username(usr_username, usr_password, new_username):
-
     with open("./src/users.txt", "r") as users_file:
         lines = users_file.readlines()
 
@@ -51,13 +60,18 @@ def change_username(usr_username, usr_password, new_username):
                 users_file_write.write(
                     new_username + " " + usr_password + "\n")
 
-    print("Nome de usuário alterado com sucesso!")
     users_file.close()
     users_file_write.close()
 
+    if check_user(new_username, usr_password):
+        print("Usuário alterado com sucesso")
+        return True
+    else:
+        print("Erro ao alterar usuário")
+        return False
+
 
 def change_password(usr_username, usr_password, new_password):
-
     with open("./src/users.txt", "r") as users_file:
         lines = users_file.readlines()
 
@@ -69,7 +83,15 @@ def change_password(usr_username, usr_password, new_password):
                 users_file_write.write(
                     usr_username + " " + new_password + "\n")
 
-    print("Senha alterada com sucesso!")
+    users_file.close()
+    users_file_write.close()
+
+    if check_user(usr_username, new_password):
+        print("Senha alterada com sucesso")
+        return True
+    else:
+        print("Erro ao alterar senha")
+        return False
 # end user preferences
 
 
