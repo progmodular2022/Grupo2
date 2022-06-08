@@ -1,0 +1,59 @@
+Documentação do módulo de Login
+
+## Objetivo
+
+- O módulo foi desenvolvido com a finalidade de proporcionar manipulações básicas para criação
+e alteração da conta dos usuários que utilizarem o programa
+
+
+## Conteúdo do arquivo
+
+- def create_user():
+- def check_user(username, password):
+- def check_username_duplicity(username):
+- def change_username(usr_username, usr_password, new_username):
+- def change_password(usr_username, usr_password, new_password):
+- def save_user(username, password):
+
+## Descrições das funções
+
+- def create_user():
+-> Função para criação de um novo usuário;
+-> Não recebe parâmetros, porém cria as variáveis dentro de si mesma
+e as salva utilizando a função de salvar usuário;
+-> Retorna username criado para possível manipulação do mesmo posteriormente;
+
+- def check_user(username, password):
+-> Utiliza os parâmetrs recebidos, username e password, para buscar dentro
+do arquivo de usuários criado;
+-> A função utiliza busca linear para buscar pelo username e manipulação de strings
+para verificar cada campo especificamente;
+-> Retorna True caso encontre o usuário e False caso não;
+
+- def check_username_duplicity(username):
+-> Recebe apenas username como parâmetro para procurar linearmente pelo nome de usuário;
+-> Função criada para tornar possível a utilização do mesmo username com diferentes senhas
+por diferentes usuários;
+-> Mesma lógica da função check_user(), caso encontre o usuário retorna True, caso não,
+retorna False;
+
+- def change_username(usr_username, usr_password, new_username):
+-> Função apenas para uso preferencial do usuário;
+-> Os parâmetros recebidos tem a finalidade de permitir a busca e atualização das informações
+do usuário;
+-> Utiliza busca linear para encontrar o usuário no arquivo e caso encontrado, atualiza seu
+username e grava todos os usuários novamente corretamente;
+-> Caso a alteração de username ocorra com sucesso retorna True, caso contrário, retorna False;
+
+- def change_password(usr_username, usr_password, new_password):
+-> Função apenas para uso preferencial do usuário;
+-> Os parâmetros recebidos tem a finalidade de permitir a busca e atualzação das informações
+do usuário;
+-> Utiliza busca linear para encontrar o usuário no arquivo e caso encontrado, atualiza sua
+senha e grava todos os usuários novamente corretamente;
+-> Caso a alteração de senha ocorra com sucesso retorna True, caso contrário, retorna False;
+
+- def save_user(username, passowrd):
+-> Função auxiliar para gravação das informações dos usuários em arquivo;
+-> username e password são parâmetros para indicar o que será gravado;
+-> Utiliza manipulação de arquivos para escrever novas informações sempre no final do arquivo;
