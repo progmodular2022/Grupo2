@@ -1,8 +1,8 @@
-import login
 import sys
 path_to_module = "./src/"
 sys.path.append(path_to_module)
 
+import login
 
 # test create_user()
 
@@ -14,7 +14,7 @@ def test_create_user():
 # test check_user()
 def test_check_user():
     assert login.check_user("usuario123", "senha420") == True
-    assert login.check_user("test456", "24senhaforte69") == True
+    assert login.check_user("test456", "senhaforte69") == True
 
 
 # test change_username()

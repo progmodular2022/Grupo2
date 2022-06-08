@@ -1,8 +1,8 @@
-import main
 import sys
 path_to_module = "./src/"
 sys.path.append(path_to_module)
 
+import main
 
 def test_check_letter():
     assert main.check_letter("a", "banana") == True
