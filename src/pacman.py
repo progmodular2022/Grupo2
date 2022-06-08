@@ -467,16 +467,6 @@ def digitandoLogin(coord_x, coord_y, listaRender, modo):
         pygame.display.flip()
         clock.tick(30)
 
-
-def verificaLogin(nomeJogo, user, password):
-    return user == "Flavio" and password == "abacaxi"
-def registraLogin(nomeJogo, user, password):
-    print("Login Registrado")
-    return
-def verificaNovoLogin(nomeJogo, user):
-    return user != "Flavio"
-
-
 def telaLogin():
     clock = pygame.time.Clock()
     coord_x = 20
