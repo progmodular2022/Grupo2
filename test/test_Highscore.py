@@ -16,6 +16,7 @@ def test_insereScore():
             assert Highscore.insereScore("test_insere_Highscore", nomeUser, pontuacaoUser) == -1
         lista_usuarios.append([str(1 + i), nomeUser, pontuacaoUser])
     assert Highscore.insereScore("test_insere_Highscore", "usuario-1", "1") == -1
+    assert Highscore.insereScore("test_insere_Highscore", "usuario500", "521") == -1
     lista_arquivo = []
     with open("Score_test_insere_Highscore.txt", "r") as arquivoInsere:
         for linha in arquivoInsere:
@@ -23,6 +24,15 @@ def test_insereScore():
             lista_arquivo.append(dadosScore)
     assert lista_arquivo == lista_usuarios[:-2]
     assert lista_arquivo != lista_usuarios
+    assert Highscore.insereScore("test_insere_Highscore", "usuario500", "1026") == 1
+    lista_arquivo = []
+    with open("Score_test_insere_Highscore.txt", "r") as arquivoInsere:
+        for linha in arquivoInsere:
+            dadosScore = linha.strip().split(" ")
+            lista_arquivo.append(dadosScore)
+    assert lista_arquivo[0] == ["1", "usuario500", "1026"]
+    assert lista_arquivo[1] == ["2", "usuario0", "1026"]
+    assert lista_arquivo[2] == ["3", "usuario1", "1025"]
     print("Testes da funcao insereScore concluido")
 
     
@@ -97,4 +107,3 @@ test_insereScore()
 test_buscaScore()
 test_removeScore()
 test_top10()
-
