@@ -108,7 +108,7 @@ class Cenario(ElementoJogo):
         pontos_x = self.tamanho * 30
         pontos_img = font.render("Score {}".format(self.pontos), True, AMARELO)
         vidas_img = font.render("Vidas {}".format(self.vidas), True, AMARELO)
-        highscore_img = font.render("Highscore".format(self.vidas), True, AMARELO)
+        highscore_img = font.render("Highscore", True, AMARELO)
         listaTop10 = []
         cont = 0
         for score in Highscore.top10("Pacman"):
