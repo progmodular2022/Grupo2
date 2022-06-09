@@ -4,21 +4,24 @@ sys.path.append(path_to_module)
 
 import main
 
-def mult():
-    assert main.mult(3, 4) == 12
-    assert main.mult(3.5, 4) == 12
-    assert main.mult(3.9, 4) == 12
-    assert main.mult(3.9, 4.1) == 13
+def test_check_letter():
+    assert main.check_letter("a", "banana") == True
+    assert main.check_letter("b", "banana") == True
+    assert main.check_letter("c", "banana") == False
+    assert main.check_letter("d", "banana") == False
 
 
-def test_add():
-    assert main.add(3, 4) == 7
-    assert main.add(3.5, 4) == 7
-    assert main.add(3.9, 4) == 7
-    assert main.add(3.9, 4.1) == 8
+def test_add_letter():
+    assert main.add_letter("a", "banana", ["_", "_", "_", "_", "_", "_"], 0) == (
+        ["_", "a", "_", "a", "_", "a"], 3)
+    assert main.add_letter("b", "banana", ["_", "_", "_", "_", "_", "_"], 0) == (
+        ["b", "_", "_", "_", "_", "_"], 1)
+    assert main.add_letter("c", "banana", ["_", "_", "_", "_", "_", "_"], 0) == (
+        ["_", "_", "_", "_", "_", "_"], 0)
 
 
-def test_to_sentence():
-    assert main.to_sentence('apple') == 'Apple.'
-    assert main.to_sentence('Apple trees') == 'Apple trees.'
-    assert main.to_sentence('Apple trees.') == 'Apple trees.'
+def test_check_full_word():
+    assert main.check_full_word("banana", "banana") == True
+    assert main.check_full_word("abacaxi", "abacate") == False
+    assert main.check_full_word("abacaxi", "abacaxi") == True
+    assert main.check_full_word("coelho", "ventilador") == False
