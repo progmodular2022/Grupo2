@@ -1,5 +1,7 @@
+import os
 import random
 import login
+import Highscore
 
 
 def select_word(words):
@@ -120,6 +122,7 @@ def main():
 
         if login.check_user(inp_username, inp_password):
             print("Login realizado com sucesso!")
+            username = inp_username
         else:
             print("Login inválido!")
             return
@@ -130,6 +133,7 @@ def main():
 
         if login.check_user(usr_username, usr_password):
             print("Login efetuado com sucesso")
+            username = usr_username
         else:
             print("Login inválido")
             return
@@ -153,83 +157,111 @@ def main():
                 new_password = input("Insira a nova senha:\n")
                 login.change_password(usr_username, usr_password, new_password)
 
-    # daqui pra baixo é o jogo
-    words = open("./src/words.txt", "r").read()
-    words_vector = file_words_to_vector(words.split("\n"))
+    usr_inp = input("Quer jogar ou conferir as pontuações? (jogar/pontos)\n")
 
-    word = select_word(words_vector)[0]
-    user_word = ["_" for i in range(len(word))]
+    if usr_inp == "pontos":
+        score_list = Highscore.top10("forca")
+        print("\nPontuações:")
+        for score in score_list:
+            print(score)
+        return
 
-    stages = display_hangman()
+    else:
+        # daqui pra baixo é o jogo
 
-    letters_found = 0
+        if not os.path.isfile("words.txt"):
+            with open("words.txt", "a"):
+                pass
 
-    attempts = len(stages)
-    attempts_count = 0
+        words = open("words.txt", "r").read()
+        words_vector = file_words_to_vector(words.split("\n"))
 
-    used_letters = []
+        word = select_word(words_vector)[0]
+        user_word = ["_" for i in range(len(word))]
 
-    while attempts_count <= attempts:
-        print(stages[attempts_count])
+        stages = display_hangman()
 
-        # printando letras usadas
-        if len(used_letters) > 0:
-            print("letras já usadas:", end="")
-            for letters in used_letters:
-                print(letters, end=" ")
+        letters_found = 0
 
-        # printando a palavra do player
-        print("\nPalavra: ", end="")
-        for letter in user_word:
-            print(letter, end=" ")
+        attempts = len(stages)
+        attempts_count = 0
 
-        # pegando input do player
-        user_letter = input("\n>Digite uma letra: ")
-        print("Se quiser chutar a palavra completa digite 'chutar' para então digitar a palavra")
+        used_letters = []
 
-        if user_letter == "chutar":
-            user_word = input("Digite a palavra completa: ")
-            if check_full_word:
-                print("\nParabéns, você ganhou!")
-                return
-            else:
-                print("\nVocê perdeu!")
-                return
+        user_score = 0
 
-        # verificando se a letra já foi usada
-        if user_letter in used_letters:
-            print("\nLetra já usada")
-            continue
+        while attempts_count <= attempts:
+            print(stages[attempts_count])
 
-        else:
-            used_letters.append(user_letter)
+            # printando letras usadas
+            if len(used_letters) > 0:
+                print("letras já usadas:", end="")
+                for letters in used_letters:
+                    print(letters, end=" ")
 
-            # verificando se a letra digitada existe na palavra
-            if check_letter(user_letter, word):
-                user_word, letters_found = add_letter(
-                    user_letter, word, user_word, letters_found)
-            else:
-                print("\n>Letra não encontrada")
-                attempts_count += 1
-                if attempts_count == attempts:
-                    print(">Número máximo de tentativas atingido\n>Você perdeu!")
-                    print("Você errou, a palavra era:", word)
-                    return
-
-        # verificando se numero de letras encontradas tem o tamanho da palavra pra ver se o player ganhou sem digitar a palavra completa
-        if letters_found == len(word):
+            # printando a palavra do player
             print("\nPalavra: ", end="")
             for letter in user_word:
                 print(letter, end=" ")
 
-            # verificando se palavra formada pelas letras está certa
-            if check_full_word:
-                print("\nParabéns, você ganhou!")
-                return
+            # pegando input do player
+            user_letter = input("\n>Digite uma letra: ")
+            print(
+                "Se quiser chutar a palavra completa digite 'chutar' para então digitar a palavra")
+
+            if user_letter == "chutar":
+                user_word = input("Digite a palavra completa: ")
+                if check_full_word:
+                    print("\nParabéns, você ganhou!")
+                    user_score += 10
+                    Highscore.insereScore("forca", username, str(user_score))
+                    return
+                else:
+                    print("\nVocê perdeu!")
+                    Highscore.insereScore("forca", username, str(user_score))
+                    return
+
+            # verificando se a letra já foi usada
+            if user_letter in used_letters:
+                print("\nEssa letra já foi usada")
+                continue
+
             else:
-                print("\nVocê perdeu!")
-                return
-    # fim do jogo
+                used_letters.append(user_letter)
+
+                # verificando se a letra digitada existe na palavra
+                if check_letter(user_letter, word):
+                    user_word, letters_found = add_letter(
+                        user_letter, word, user_word, letters_found)
+                    user_score += 5 * letters_found
+
+                else:
+                    print("\n>Letra não encontrada")
+                    attempts_count += 1
+                    if attempts_count == attempts:
+                        print(">Número máximo de tentativas atingido\n>Você perdeu!")
+                        print("Você errou, a palavra era:", word)
+                        Highscore.insereScore(
+                            "forca", username, user_score)
+                        return
+
+            # verificando se numero de letras encontradas tem o tamanho da palavra pra ver se o player ganhou sem digitar a palavra completa
+            if letters_found == len(word):
+                print("\nPalavra: ", end="")
+                for letter in user_word:
+                    print(letter, end=" ")
+
+                # verificando se palavra formada pelas letras está certa
+                if check_full_word:
+                    print("\nParabéns, você ganhou!")
+                    user_score += 10
+                    Highscore.insereScore("forca", username, str(user_score))
+                    return
+                else:
+                    print("\nVocê perdeu!")
+                    Highscore.insereScore("forca", username, str(user_score))
+                    return
+        # fim do jogo
 
 
 if __name__ == "__main__":
