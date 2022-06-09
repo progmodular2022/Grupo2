@@ -3,6 +3,8 @@ from os.path import exists
 
 
 def criacaoArquivo(func):
+    #Verifica se o arquivo a ser utilizado pelas funcoes
+    #Caso ele nao exista, cria o arquivo e executa a funcao em seguir
     def inner(nomeJogo, *args, **kwargs):
         nomeArquivo = "Score_" + nomeJogo + ".txt"
         if not exists(nomeArquivo):
