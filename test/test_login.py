@@ -4,14 +4,8 @@ sys.path.append(path_to_module)
 
 import login
 
-# test create_user()
-
-# def test_create_user():
-#     assert login.create_user("test1", "928") == True
-#     assert login.create_user("usr", "1pwd") == True
-
-
 # test check_user()
+
 def test_check_user():
     assert login.check_user("usuario123", "senha420") == False
     assert login.check_user("dev", "dev123") == True
