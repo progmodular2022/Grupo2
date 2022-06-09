@@ -36,7 +36,7 @@ def test_buscaScore():
         lista_usuarios.append([str(1 + i), nomeUser, pontuacaoUser])
     for j in range(1026):
         if j >= 1024:
-            assert Highscore.buscaScore("test_busca_Highscore", "usuario" + str(j)) == -1
+            assert Highscore.buscaScore("test_busca_Highscore", "usuario" + str(j)) == []
         else:
             assert Highscore.buscaScore("test_busca_Highscore", "usuario" + str(j)) == lista_usuarios[j]
         assert Highscore.buscaScore("test_busca_Highscore", "usuario-1") == -1
