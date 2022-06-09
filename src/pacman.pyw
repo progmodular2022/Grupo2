@@ -11,6 +11,7 @@ screen = pygame.display.set_mode((800, 600), 0)
 pygame.display.set_caption("Pacman")
 font = pygame.font.SysFont("arial", 20, True, False)
 
+
 AMARELO = (255, 255, 0)
 PRETO = (0, 0, 0)
 AZUL = (0, 0, 255)
@@ -115,7 +116,7 @@ class Cenario(ElementoJogo):
             cont += 1
 
         scoreUsuario = Highscore.buscaScore("Pacman", nomeUsuario)
-        if scoreUsuario != -1:
+        if scoreUsuario != []:
             tela.blit(font.render(scoreUsuario[0] + " " + scoreUsuario[1] + " " + scoreUsuario[2], True, AMARELO), (pontos_x, 430))
         tela.blit(highscore_img, (pontos_x, 120))
         tela.blit(pontos_img, (pontos_x, 50))
