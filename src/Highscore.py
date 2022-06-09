@@ -1,8 +1,20 @@
 
 from os.path import exists
 
-def insereScore(nomeJogo, nomeUsuario, pontuacao):
+
+def criacaoArquivo(func):
+    def inner(nomeJogo, *args, **kwargs):
+        nomeArquivo = "Score_" + nomeJogo + ".txt"
+        if not exists(nomeArquivo):
+            criacaoArq = open(nomeArquivo, "x")
+            criacaoArq.close()
+        return func(nomeJogo, *args, **kwargs)
+    return inner
+
+@criacaoArquivo
+def insereScore(nomeJogo, nomeUsuario, pontuacao) -> int:
     #Insere os dados da nova pontuacao no arquivo referente a nomeJogo
+    #Caso o usuario ja esteja no arquivo, so insere caso a nova pontuacao seja maior que a registrada
     #Todos os parametros devem ser strings
     #No arquivo serao registrados a posicao, nomeUsuario e pontuacao
     #Tais dados ficarao separados por " "
@@ -13,9 +25,6 @@ def insereScore(nomeJogo, nomeUsuario, pontuacao):
     novaPosicao = 1
     contador = 1
     nomeArquivo = "Score_" + nomeJogo + ".txt"
-    if not exists(nomeArquivo):
-        criacaoArq = open(nomeArquivo, "x")
-        criacaoArq.close()
     with open(nomeArquivo, "r") as arquivo:
         for linha in arquivo:
             contador += 1 
@@ -42,24 +51,21 @@ def insereScore(nomeJogo, nomeUsuario, pontuacao):
     return 1
 
 
-
-def buscaScore(nomeJogo, nomeUsuario):
+@criacaoArquivo
+def buscaScore(nomeJogo, nomeUsuario) -> list:
     #Retorna uma lista contendo a posicao, o nomeUsuario e a pontuacao referentes a busca
     #Todos os parametros devem ser strings
-    #Retorna -1 caso o nomeUsuario nao seja encontrado no arquivo
+    #Retorna lista vazia caso o nomeUsuario nao seja encontrado no arquivo
     nomeArquivo = "Score_" + nomeJogo + ".txt"
-    if not exists(nomeArquivo):
-        criacaoArq = open(nomeArquivo, "x")
-        criacaoArq.close()
     with open("Score_" + nomeJogo + ".txt", "r") as arquivo:
         for linha in arquivo:
             linhaScore = (linha.strip()).split(" ")
             if linhaScore[1] == nomeUsuario:
                 return linhaScore
-    return -1
+    return []
 
-
-def removeScore(nomeJogo, nomeUsuario):
+@criacaoArquivo
+def removeScore(nomeJogo, nomeUsuario) -> int:
     #Remove os dados referentes a nomeUsuario no arquivo de nomeJogo
     #Atualiza os dados do Highscore apos a remocao
     #Todos os parametros devem ser strings
@@ -69,9 +75,6 @@ def removeScore(nomeJogo, nomeUsuario):
     listaLinhas = []
     usuarioEncontrado = 0
     nomeArquivo = "Score_" + nomeJogo + ".txt"
-    if not exists(nomeArquivo):
-        criacaoArq = open(nomeArquivo, "x")
-        criacaoArq.close()
     with open("Score_" + nomeJogo + ".txt", "r") as arquivo:
         for linha in arquivo:
             contador += 1 
@@ -90,15 +93,12 @@ def removeScore(nomeJogo, nomeUsuario):
     return 1
     
     
-    
-def top10(nomeJogo):
+@criacaoArquivo
+def top10(nomeJogo) -> list:
     #Retorna uma lista referente as 10 melhores pontuacoes salvas no arquivo de nomeJogo
     #Cada elemento da lista e uma lista contendo posicao, nome do usuario e pontuacao
     #Se o numero de pontuacoes salvas no arquivo for menor do que 10, todos os dados serao retornados na lista
     nomeArquivo = "Score_" + nomeJogo + ".txt"
-    if not exists(nomeArquivo):
-        criacaoArq = open(nomeArquivo, "x")
-        criacaoArq.close()
     with open("Score_" + nomeJogo + ".txt", "r") as arquivo:
         listatop10 = []
         cont = 0
@@ -110,9 +110,3 @@ def top10(nomeJogo):
                 break
             cont += 1
     return listatop10
-
-
-
-
-
-   
