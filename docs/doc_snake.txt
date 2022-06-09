@@ -1,0 +1,8 @@
+﻿Documentação Snake
+
+Como inicializar o jogo:
+
+O usuário pode iniciar o jogo através do executável gerado ou utilizando o comando python3 no terminal
+
+Instruções do Jogo:
+O bloco preto, a cobra, é controlada pelas setas do teclado. O objetivo do jogo é fazer com que a cobra fique o maior possível, passando pelos blocos amarelos, que representam a comida, lembrando sempre de se manter vivo. É importante ter cuidado com as bordas, caso a cobra atinja a borda ou bata em si mesma será Game Over.

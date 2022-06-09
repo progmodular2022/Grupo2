@@ -1,0 +1,45 @@
+Documentação do módulo de Highscore
+
+## Objetivo
+O módulo foi desenfolvico com a finalidade de criar e modificar um arquivo contendo pontuações salvas no formato de Highscore.
+No arquivo serão salvos a posição, o nome do usuário e a sua pontuação mais alta alcançada.
+
+## Conteúdo do arquivo:
+def criacaoArquivo(func):
+def insereScore(nomeJogo, nomeUsuario, pontuacao) -> int:
+def buscaScore(nomeJogo, nomeUsuario) -> list:
+def removeScore(nomeJogo, nomeUsuario) -> int:
+def top10(nomeJogo) -> list:
+
+
+## Descrições das funções
+def criacaoArquivo(func):
+    Verifica se o arquivo a ser utilizado pelas funcoes
+    Caso ele nao exista, cria o arquivo e executa a funcao em seguir
+
+def insereScore(nomeJogo, nomeUsuario, pontuacao) -> int:
+    Insere os dados da nova pontuacao no arquivo referente a nomeJogo
+    Caso o usuario ja esteja no arquivo, so insere caso a nova pontuacao seja maior que a registrada
+    Todos os parametros devem ser strings
+    No arquivo serao registrados a posicao, nomeUsuario e pontuacao
+    Tais dados ficarao separados por " "
+    O limite de dados salvos no arquivo e de 1024
+    A funcao retorna -1 caso a nova pontuacao nao seja inserida
+    A funcao retorna 1 na insercao com sucesso da pontuacao
+
+def buscaScore(nomeJogo, nomeUsuario) -> list:
+    Retorna uma lista contendo a posicao, o nomeUsuario e a pontuacao referentes a busca
+    Todos os parametros devem ser strings
+    Retorna lista vazia caso o nomeUsuario nao seja encontrado no arquivo
+
+def removeScore(nomeJogo, nomeUsuario) -> int:
+    Remove os dados referentes a nomeUsuario no arquivo de nomeJogo
+    Atualiza os dados do Highscore apos a remocao
+    Todos os parametros devem ser strings
+    Retorna -1 caso o nomeUsuario nao seja encontrado no arquivo
+    Retorna 1 ao remover a pontuacao com sucesso
+
+def top10(nomeJogo) -> list:
+    Retorna uma lista referente as 10 melhores pontuacoes salvas no arquivo de nomeJogo
+    Cada elemento da lista e uma lista contendo posicao, nome do usuario e pontuacao
+    Se o numero de pontuacoes salvas no arquivo for menor do que 10, todos os dados serao retornados na lista

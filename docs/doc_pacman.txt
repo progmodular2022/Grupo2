@@ -1,0 +1,10 @@
+﻿Documentação Pacman
+
+Como inicializar o jogo:
+
+O usuário pode iniciar o jogo através do executável gerado ou utilizando o comando python3 no terminal
+
+Instruções do Jogo:
+O objetivo do jogo é que o Pacman, o boneco amarelo, pegue todos os pontos amarelos espalhados fugindo dos fantasmas. Para movimentar o personagem utilize as teclas direcionais do teclado. Caso deseje, é possível pausar o jogo apertando a tecla “P”.
+
+Ao finalizar o jogo, tanto na hipótese de coletar todos os pontos quanto das vidas acabarem é possível reiniciar o jogo no mesmo usuário digitando “P”.
