@@ -1,5 +1,11 @@
-# create user:
+import os
 
+if not os.path.isfile("users.txt"):
+    with open("users.txt", "w"):
+        pass
+
+
+# create user:
 
 def create_user():
     username = input("insira o nome de usuário: ")
@@ -13,15 +19,13 @@ def create_user():
     else:
         print("Erro ao criar usuário")
         return
-
-
 # end create user
 
 
 # check user credentials
 
 def check_user(username, password):
-    with open("./src/users.txt", "r") as user_file:
+    with open("users.txt", "r") as user_file:
         for line in user_file:
             user_data = line.strip().split()
             if username == user_data[0] and password == user_data[1]:
@@ -35,7 +39,7 @@ def check_user(username, password):
 
 
 def check_username_duplicity(username):
-    with open("./src/users.txt", "r") as user_file:
+    with open("users.txt", "r") as user_file:
         for line in user_file:
             user_data = line.strip().split()
             if username == user_data[0]:
@@ -43,19 +47,16 @@ def check_username_duplicity(username):
         else:
             print("Usuário não encontrado")
             return False
-
-
 # end check user credentials
 
 
 # user preferences
 
-
 def change_username(usr_username, usr_password, new_username):
-    with open("./src/users.txt", "r") as users_file:
+    with open("users.txt", "r") as users_file:
         lines = users_file.readlines()
 
-    with open("./src/users.txt", "w") as users_file_write:
+    with open("users.txt", "w") as users_file_write:
         for line in lines:
             if line.strip().split()[0] != usr_username:
                 users_file_write.write(line)
@@ -75,10 +76,10 @@ def change_username(usr_username, usr_password, new_username):
 
 
 def change_password(usr_username, usr_password, new_password):
-    with open("./src/users.txt", "r") as users_file:
+    with open("users.txt", "r") as users_file:
         lines = users_file.readlines()
 
-    with open("./src/users.txt", "w") as users_file_write:
+    with open("users.txt", "w") as users_file_write:
         for line in lines:
             if line.strip().split()[1] != usr_password:
                 users_file_write.write(line)
@@ -100,9 +101,7 @@ def change_password(usr_username, usr_password, new_password):
 
 # save user
 
-
 def save_user(username, password):
-    with open("./src/users.txt", "a") as file:
+    with open("users.txt", "a") as file:
         file.write(username + " " + password + "\n")
-
 # end save user
