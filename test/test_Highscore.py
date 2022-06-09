@@ -39,7 +39,7 @@ def test_buscaScore():
             assert Highscore.buscaScore("test_busca_Highscore", "usuario" + str(j)) == []
         else:
             assert Highscore.buscaScore("test_busca_Highscore", "usuario" + str(j)) == lista_usuarios[j]
-        assert Highscore.buscaScore("test_busca_Highscore", "usuario-1") == -1
+        assert Highscore.buscaScore("test_busca_Highscore", "usuario-1") == []
     print("Teste da funcao buscaScore concluido")
         
 
