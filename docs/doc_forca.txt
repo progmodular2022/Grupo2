@@ -1,0 +1,10 @@
+﻿Documentação Forca
+
+Como inicializar o jogo:
+
+O usuário pode iniciar o jogo através do executável gerado ou utilizando o comando python3 no terminal
+
+Instruções do jogo:
+
+Após iniciar o jogo e logar em sua conta, o usuário tem a opção de inserir letras para tentar adivinhar a palavra e caso queira chutar a palavra completa, basta digitar “chutar” e então escrevê-la.
+O usuário perde se errar a palavra completa ao tentar chutar ou cometer mais um erro vez após completar o desenho do boneco
